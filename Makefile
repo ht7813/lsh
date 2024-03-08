@@ -1,10 +1,10 @@
-CFLAGS += "-Iinclude"
+CFLAGS=
 all:
 	mkdir -p out
 	@echo "Building LSH..."
-	gcc ${CFLAGS} -o out/lsh src/main.c
-	gcc ${CFLAGS} -o out/pwd src/pwd.c
-	gcc ${CFLAGS} -o out/lenv src/lenv.c
+	gcc -Iinclude ${CFLAGS} -o out/lsh src/main.c
+	gcc -Iinclude ${CFLAGS} -o out/pwd src/pwd.c
+	gcc -Iinclude ${CFLAGS} -o out/lenv src/lenv.c
 run:
 	out/lsh
 install:

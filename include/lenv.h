@@ -1,5 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
+#include "lsh.h"
+#ifndef APP_NAME
 #define APP_NAME "lenv"
+#endif

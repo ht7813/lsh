@@ -1,10 +1,10 @@
-#include <lenv.h>
+#include "lenv.h"
 
 extern char **environ;
 void get(const char *_env) {
     puts(getenv(_env));
 
-    exit(0);
+    //exit(0);
 }
 
 void set(const char *_name, const char *_value) {
@@ -15,27 +15,27 @@ void set(const char *_name, const char *_value) {
         fprintf(stderr, "Set Failled!\n");
     }
 
-    exit(0);
+    //exit(0);
 }
 
-int main(int argc, char *argv[])
+int lsh_lenv(char **args)
 {
     //printf("%d", argc);
-    if (!strcmp(argv[1], "--list") || !strcmp(argv[1], "-l"))
+    if (!strcmp(args[1], "--list") || !strcmp(args[1], "-l"))
     {
         list_all();
-    }else if (argc == 3 && !strcmp(argv[1], "--get")) {
-        get(argv[2]);
-    }else if (argc == 4 && !strcmp(argv[1], "--set")) {
-        set(argv[2], argv[3]);
-    }else if (!strcmp(argv[1], "--help") || !strcmp(argv[1], "-h"))
+    }else if (!strcmp(args[1], "--get")) {
+        get(args[2]);
+    }else if (!strcmp(args[1], "--set")) {
+        set(args[2], args[3]);
+    }else if (!strcmp(args[1], "--help") || !strcmp(args[1], "-h"))
     {
         help(0);
     }else{
         help(1);
     }
 
-    return 0;
+    return 1;
 }
 
 int list_all()
@@ -46,7 +46,7 @@ int list_all()
         puts(environ[i]);
     }
 
-    exit(0);
+    //exit(0);
 
 }
 
@@ -63,5 +63,5 @@ int help(int err)
     printf("    --get       Get a env value\n");
     printf("    --set       Change or Add a env's value\n");
 
-    exit(err);
+    //exit(err);
 }

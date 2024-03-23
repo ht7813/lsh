@@ -1,17 +1,16 @@
-#include <stdio.h>
-#include <unistd.h>
+#include "lsh.h"
 
-int main()
+int lsh_pwd(char **args)
 {
     char cwd[FILENAME_MAX];
     
     getcwd(cwd, sizeof(cwd));
     if (cwd == NULL) {
         perror("Get failed!");
-	return -1;
+	//return -1;
     }else{
         printf("%s\n", cwd);
     }
 
-    return 0;
+    return 1;
 }

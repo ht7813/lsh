@@ -14,4 +14,5 @@
 int lsh_cd(char **args);
 int lsh_help(char **args);
 int lsh_exit(char **args);
-//int lsh_pwd(char **args);
+int lsh_pwd(char **args);
+int lsh_lenv(char **args);

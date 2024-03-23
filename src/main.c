@@ -1,4 +1,4 @@
-#include <lsh.h>
+#include "lsh.h"
 
 char *lsh_read_line(void)
 {
@@ -116,13 +116,17 @@ int lsh_launch(char **args)
 char *builtin_str[] = {
     "cd",
     "help",
-    "exit"
+    "exit",
+	"pwd",
+	"lenv"
 };
 
 int (*builtin_func[]) (char **) = {
     &lsh_cd,
     &lsh_help,
-    &lsh_exit
+    &lsh_exit,
+	&lsh_pwd,
+	&lsh_lenv
 };
 
 int lsh_num_builtins() {

@@ -20,19 +20,22 @@ void set(const char *_name, const char *_value) {
 
 int lsh_lenv(char **args)
 {
+	if (!args[1])
+	{
+		help();
     //printf("%d", argc);
-    if (!strcmp(args[1], "--list") || !strcmp(args[1], "-l"))
+	}else if (!strcmp(args[1], "--list") || !strcmp(args[1], "-l"))
     {
         list_all();
     }else if (!strcmp(args[1], "--get")) {
         get(args[2]);
     }else if (!strcmp(args[1], "--set")) {
         set(args[2], args[3]);
-    }else if (!strcmp(args[1], "--help") || !strcmp(args[1], "-h"))
+    /*}else if (!strcmp(args[1], "--help") || !strcmp(args[1], "-h"))
     {
-        help(0);
+        help(0);*/
     }else{
-        help(1);
+        help();
     }
 
     return 1;
@@ -50,11 +53,11 @@ int list_all()
 
 }
 
-int help(int err)
+int help()
 {
-    if (err == 1) {
+    /*if (err == 1) {
         fprintf(stderr, "%s: Arguments error!\n", APP_NAME);
-    }
+    }*/
     printf("%s version 1.0\n", APP_NAME);
     printf("Usege: %s option... [value]\n", APP_NAME);
     printf("Options:\n");

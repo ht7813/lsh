@@ -117,16 +117,16 @@ char *builtin_str[] = {
     "cd",
     "help",
     "exit",
-	"pwd",
-	"lenv"
+    "pwd",
+    "lenv"
 };
 
 int (*builtin_func[]) (char **) = {
     &lsh_cd,
     &lsh_help,
     &lsh_exit,
-	&lsh_pwd,
-	&lsh_lenv
+    &lsh_pwd,
+    &lsh_lenv
 };
 
 int lsh_num_builtins() {

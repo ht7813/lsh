@@ -8,8 +8,7 @@ void get(const char *_env) {
 }
 
 void set(const char *_name, const char *_value) {
-    if(setenv(_name, _value, 1) == 0)
-    {
+    if(setenv(_name, _value, 1) == 0) {
         printf("Set env %s to %s\n",_name , _value);
     }else{
         fprintf(stderr, "Set Failled!\n");
@@ -20,17 +19,24 @@ void set(const char *_name, const char *_value) {
 
 int lsh_lenv(char **args)
 {
-	if (!args[1])
-	{
+	if (!args[1]) {
 		help();
-    //printf("%d", argc);
+    	//printf("%d", argc);
 	}else if (!strcmp(args[1], "--list") || !strcmp(args[1], "-l"))
     {
         list_all();
     }else if (!strcmp(args[1], "--get")) {
-        get(args[2]);
+		if (!args[2]) {
+			printf("Usage: lenv --get ENV\n");
+		}else{
+        	get(args[2]);
+		}
     }else if (!strcmp(args[1], "--set")) {
-        set(args[2], args[3]);
+		if (!args[3] || !args[2]) {
+			printf("Usage: lenv --set ENV VALUE\n");
+		}else{
+        	set(args[2], args[3]);
+		}
     /*}else if (!strcmp(args[1], "--help") || !strcmp(args[1], "-h"))
     {
         help(0);*/

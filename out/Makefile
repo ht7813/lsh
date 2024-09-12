@@ -6,7 +6,7 @@ LD=gcc
 
 all:
 	@echo "Linking LSH..."
-	@echo "		CCLD     $(TARGET)"
+	@echo "    CCLD     $(TARGET)"
 	@$(LD) -o $(TARGET) $(OBJ)
 clean:
 	@rm $(TARGET)

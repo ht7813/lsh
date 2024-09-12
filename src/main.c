@@ -2,6 +2,7 @@
 
 char *lsh_read_line(void)
 {
+#ifdef LSH_NOT_USE_STD_GETLINE
     int bufsize = LSH_RL_BUFSIZE;
     int position = 0;
     char *buffer = malloc(sizeof(char) * bufsize);
@@ -36,10 +37,7 @@ char *lsh_read_line(void)
             }
         }
     }
-}
-
-/*char *lsh_read_line(void)
-{
+#else
     char *line = NULL;
     ssize_t bufsize = 0; // have getline allocate a buffer for us
 
@@ -53,7 +51,8 @@ char *lsh_read_line(void)
     }
 
     return line;
-}*/
+#endif
+}
 
 char **lsh_split_line(char *line)
 {

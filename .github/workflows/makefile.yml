@@ -23,11 +23,10 @@ jobs:
     - name: Build artifact
       run: |
            mkdir build
-           cp out/lsh build
-           bash -e -c "cd build;tar zcvf lsh-x86_64.tar.gz lsh"
+           cp out/lsh build/lsh-x86_64
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
         name: LSH x86_64
-        path: build/lsh-x86_64.tar.gz
+        path: build/lsh-x86_64

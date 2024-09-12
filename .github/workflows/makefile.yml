@@ -14,8 +14,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Install Build uses
-      run: sudo apt install build-essential binutils
+    #- name: Install Build uses
+    #  run: sudo apt install build-essential binutils
       
-    - name: Make
+    - name: Start Make
       run: make

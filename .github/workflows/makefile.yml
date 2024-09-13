@@ -30,3 +30,26 @@ jobs:
       with:
         name: LSH x86_64
         path: build/lsh-x86_64
+
+  build-non-use-std-getline:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    #- name: Install Build uses
+    #  run: sudo apt install build-essential binutils
+      
+    - name: Start Make
+      run: make CFLAGS=-DLSH_NOT_USE_STD_GETLINE
+
+    - name: Build artifact
+      run: |
+           mkdir build
+           cp out/lsh build/lsh-x86_64-non-use-std-getline
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: LSH x86_64 Non Use Std Getline
+        path: build/lsh-x86_64-non-use-std-getline

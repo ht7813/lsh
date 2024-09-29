@@ -2,7 +2,12 @@
 
 extern char **environ;
 void get(const char *_env) {
-    puts(getenv(_env));
+    char *_result = getenv(_env);
+    if (_result == NULL) {
+        fprintf(stderr, "Get env %s error!\n", _env);
+    } else {
+        puts(_result);
+    }
 
     //exit(0);
 }

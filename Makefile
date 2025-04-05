@@ -1,5 +1,5 @@
 CFLAGS=
-LDFLAGS=
+LDFLAGS=-lreadline
 PREFIX?=/usr
 build:
 	@echo "Building LSH..."

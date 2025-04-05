@@ -38,18 +38,10 @@ int bufsize = LSH_RL_BUFSIZE;
     }
   }
 #else
-    char *line = NULL;
-    ssize_t bufsize = 0; // have getline allocate a buffer for us
-
-    if (getline(&line, &bufsize, stdin) == -1) {
-        if (feof(stdin)) {
-            exit(EXIT_SUCCESS); // We recieved an EOF
-        } else {
-            perror("readline");
-            exit(EXIT_FAILURE);
-        }
+    char *line = readline("");
+    if (line && *line) {
+        add_history(line);
     }
-
     return line;
 #endif
 }
@@ -215,12 +207,22 @@ void lsh_loop(void)
 // Main function
 int main(int argc, char **argv)
 {
-    // Load config files, if any.
+    char *home_dir = getenv("HOME");
+    if (home_dir == NULL) {
+        fprintf(stderr, "Home now set.\n");
+        return 1;
+    }
+    // Load history files, if any.
+    char histfile[256];
+    snprintf(histfile, sizeof(histfile), "%s/.lsh_history", home_dir);
+    read_history(histfile);
+    stifle_history(100);
 
     // Run command loop.
     lsh_loop();
 
     // Perform any shutdown/cleanup.
+    write_history(histfile);
 
     return EXIT_SUCCESS;
 }

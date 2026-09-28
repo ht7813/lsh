@@ -1,5 +1,6 @@
 include $(CURDIR)/Makefile
 include $(srctree)/scripts/Makefile.rules
+objs := $(patsubst %/,%/built-in.a,$(objs))
 REAL_SUBDIR := $(patsubst $(srctree)/%,%,$(CURDIR))
 cleanobjs += $(objs)
 cleanobjs += $(patsubst %.o,%.d,$(objs))

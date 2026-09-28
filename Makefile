@@ -17,6 +17,6 @@ endif
 export Q MAKEFLAGS V
 
 progs := lsh
-obj-lsh := program/built-in.a applets/built-in.a
+obj-lsh := program/ applets/
 
 include $(srctree)/scripts/Makefile.build

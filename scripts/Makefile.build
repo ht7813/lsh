@@ -1,26 +1,22 @@
 include $(srctree)/scripts/Makefile.rules
 
-define ld_rule
-$(1): $$(obj-$(1))
-	$$(call kecho,LD,$$@)
-	$$(Q)$$(CC) $$(LDFLAGS) -o $$@ $$^ $$(LDLIBS)
-endef
-
-$(foreach prog,$(progs),$(eval $(call ld_rule,$(prog))))
-
-.PHONY: all clean
-
-all: $(progs)
-
 cleanobjs += $(progs)
 _allobjs :=
 
-define objdefine
+define prog_rule
+obj-$(1) := $$(patsubst %/,%/built-in.a,$$(obj-$(1)))
+$(1): $$(obj-$(1))
+	$$(call kecho,LD,$$@)
+	$$(Q)$$(CC) $$(LDFLAGS) -o $$@ $$^ $$(LDLIBS)
 cleanobjs += $$(obj-$(1))
 _allobjs += $$(obj-$(1))
 endef
 
-$(foreach prog,$(progs),$(eval $(call objdefine,$(prog))))
+$(foreach prog,$(progs),$(eval $(call prog_rule,$(prog))))
+
+.PHONY: all clean
+
+all: $(progs)
 
 clean:
 	$(call kecho,CLEAN,.)

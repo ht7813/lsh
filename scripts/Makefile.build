@@ -1,0 +1,31 @@
+include $(srctree)/scripts/Makefile.rules
+
+define ld_rule
+$(1): $$(obj-$(1))
+	$$(call kecho,LD,$$@)
+	$$(Q)$$(CC) $$(LDFLAGS) -o $$@ $$^ $$(LDLIBS)
+endef
+
+$(foreach prog,$(progs),$(eval $(call ld_rule,$(prog))))
+
+.PHONY: all clean
+
+all: $(progs)
+
+cleanobjs += $(progs)
+_allobjs :=
+
+define objdefine
+cleanobjs += $$(obj-$(1))
+_allobjs += $$(obj-$(1))
+endef
+
+$(foreach prog,$(progs),$(eval $(call objdefine,$(prog))))
+
+clean:
+	$(call kecho,CLEAN,.)
+	$(Q)rm -f $(filter-out %/built-in.a,$(cleanobjs))
+	$(Q)$(foreach d,$(sort $(patsubst %/built-in.a,%,$(filter %/built-in.a,$(cleanobjs)))), \
+		$(MAKE) -C $(d) -f $(srctree)/scripts/Makefile.subdir_build clean; )
+
+-include $(patsubst %.o,%.d,$(filter %.o,$(_allobjs)))

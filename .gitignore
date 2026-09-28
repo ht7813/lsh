@@ -1,0 +1,6 @@
+*.o
+lsh
+.vscode/
+.idea/
+*.swp
+*.d

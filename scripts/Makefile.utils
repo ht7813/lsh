@@ -1,0 +1,6 @@
+pad_8 = $(shell printf '%-8s' '$(1)')
+define kecho
+@printf '  %s %s\n' '$(call pad_8,$1)' '$2'
+endef
+export kecho
+

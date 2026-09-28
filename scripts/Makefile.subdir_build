@@ -1,0 +1,21 @@
+include $(CURDIR)/Makefile
+include $(srctree)/scripts/Makefile.rules
+REAL_SUBDIR := $(patsubst $(srctree)/%,%,$(CURDIR))
+cleanobjs += $(objs)
+cleanobjs += $(patsubst %.o,%.d,$(objs))
+.PHONY: __all clean
+
+__all: built-in.a
+
+built-in.a: $(objs)
+	$(call kecho,AR,$(REAL_SUBDIR)/built-in.a)
+	$(Q)$(AR) rcSTP built-in.a $^
+
+clean:
+	$(call kecho,CLEAN,$(REAL_SUBDIR))
+	$(Q)rm -f built-in.a
+	$(Q)rm -f $(filter-out %/built-in.a,$(cleanobjs))
+	$(Q)$(foreach d,$(sort $(patsubst %/built-in.a,%,$(filter %/built-in.a,$(cleanobjs)))), \
+		$(MAKE) -C $(d) -f $(srctree)/scripts/Makefile.subdir_build clean; )
+
+-include $(patsubst %.o,%.d,$(filter %.o,$(objs)))

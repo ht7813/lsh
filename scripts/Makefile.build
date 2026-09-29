@@ -7,8 +7,11 @@ define prog_rule
 obj-$(1) := $$(patsubst %/,%/built-in.a,$$(obj-$(1)))
 $(1): $$(obj-$(1))
 	$$(call kecho,LD,$$@)
-	$$(Q)$$(CC) $$(LDFLAGS) -o $$@ $$^ $$(LDLIBS)
-cleanobjs += $$(obj-$(1))
+	$$(Q)$$(CC) $$(LDFLAGS) -o $$@ \
+		$$(filter-out %.a,$$^) \
+		-Wl,--whole-archive $$(filter %.a,$$^) -Wl,--no-whole-archive \
+		$$(LDLIBS)
+cleanobjs += $$(obj-$(1)) $$(patsubst %.o,%.d,$$(obj-$(1)))
 _allobjs += $$(obj-$(1))
 endef
 

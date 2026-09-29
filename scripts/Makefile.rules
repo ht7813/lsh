@@ -2,18 +2,18 @@
 include $(srctree)/scripts/Makefile.utils
 
 %.o: %.c
-	$(call kecho,CC,$(REAL_SUBDIR)/$@)
+	$(call kecho,CC,$(REAL_SUBDIR)$@)
 	$(Q)$(CC) -MMD -MP $(CFLAGS) -c -o $@ $<
 
 %.tab.c: %.y
-	$(call kecho,YACC,$(REAL_SUBDIR)/$@)
+	$(call kecho,YACC,$(REAL_SUBDIR)$@)
 	$(Q)$(YACC) -d $(YFLAGS) $< -o $@
 
 %.tab.h: %.tab.c
 	@echo -n
 
 %.yy.c: %.l %.tab.h
-	$(call kecho,LEX,$(REAL_SUBDIR)/$@)
+	$(call kecho,LEX,$(REAL_SUBDIR)$@)
 	$(Q)$(LEX) -o$@ $<
 
 %/built-in.a: % FORCE

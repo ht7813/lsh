@@ -23,7 +23,7 @@ jobs:
     - name: Build artifact
       run: |
            mkdir build
-           cp out/lsh build/lsh-x86_64
+           cp lsh build/lsh-x86_64
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
@@ -41,12 +41,12 @@ jobs:
     #  run: sudo apt install build-essential binutils
       
     - name: Start Make
-      run: make CFLAGS=-DLSH_NOT_USE_STD_GETLINE
+      run: make EXTRA_CFLAGS=-DLSH_NOT_USE_STD_GETLINE
 
     - name: Build artifact
       run: |
            mkdir build
-           cp out/lsh build/lsh-x86_64-non-use-std-getline
+           cp lsh build/lsh-x86_64-non-use-std-getline
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4

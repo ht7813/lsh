@@ -41,7 +41,7 @@ jobs:
     #  run: sudo apt install build-essential binutils
       
     - name: Start Make
-      run: make EXTRA_CFLAGS=-DLSH_NOT_USE_STD_GETLINE
+      run: make EXTRA_CFLAGS=-DLSH_NO_USE_STD_GETLINE
 
     - name: Build artifact
       run: |
